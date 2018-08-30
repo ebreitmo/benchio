@@ -19,7 +19,7 @@ Tested under all three programming environments on ARCHER: Cray, GNU, and Intel.
 For an ARCHER build:
 
 `module load cray-netcdf-hdf5parallel/4.4.0`
-
+(outdated, and ``` cray-netcdf-hdf5parallel/4.4.1.1``` requires ```hdf5_hl_parallel >= 1.10.0```)
 `module load cray-hdf5-parallel/1.8.16`  
 
 `make clean`
