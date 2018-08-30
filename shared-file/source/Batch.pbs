@@ -1,0 +1,17 @@
+#!/bin/bash --login
+
+#PBS -N TestOne
+##PBS -l select=1
+#PBS -l select=1
+#PBS -l walltime=00:10:00
+#PBS -A z19-cse
+
+export PBS_O_WORKDIR=$(readlink -f $PBS_O_WORKDIR)
+cd $PBS_O_WORKDIR
+
+mkdir -p benchio_files
+
+lfs setstripe -c -1 benchio_files
+
+aprun -n 4 ./benchio.x 
+
