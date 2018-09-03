@@ -57,7 +57,7 @@ program benchio
   iolayername(3) = 'hdf5.dat'
   iolayername(4) = 'netcdf.dat'
 
-  filedir = 'benchio_files'
+!  filedir = 'benchio_files'
 
   call MPI_Init(ierr)
 
@@ -73,14 +73,14 @@ program benchio
    read(50,*)n2
    read(50,*)n3
    read(50,*)numrep
- !  read(50,*)filedir
+   read(50,*)filedir
    close(50)
  endif
  call MPI_Bcast(n1,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n2,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n3,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
- !call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
+ call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
  write(*,*) 'Here we are: ', maxlen,rank,filedir,numrep
 
    allocate(iodata(0:n1+1, 0:n2+1, 0:n3+1))
