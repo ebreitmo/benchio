@@ -21,14 +21,18 @@ program benchio
 ! Set local array size - global sizes l1, l2 and l3 are scaled
 ! by number of processes in each dimension
 
-  integer, parameter :: n1 = 256
-  integer, parameter :: n2 = 256
-  integer, parameter :: n3 = 256
+!  integer, parameter :: n1 = 256
+   integer :: n1
+!  integer, parameter :: n2 = 256
+   integer :: n2
+!  integer, parameter :: n3 = 256
   integer, parameter :: ndim = 3
+   integer :: n3
 
   integer :: i1, i2, i3, j1, j2, j3, l1, l2, l3, p1, p2, p3
 
-  double precision :: iodata(0:n1+1, 0:n2+1, 0:n3+1)
+!  double precision :: iodata(0:n1+1, 0:n2+1, 0:n3+1)
+   double precision, allocatable :: iodata(:,:,:)
 
   integer :: rank, size, ierr, comm, cartcomm, dblesize
   integer, dimension(ndim) :: dims, coords
@@ -60,6 +64,25 @@ program benchio
 
   call MPI_Comm_size(comm, size, ierr)
   call MPI_Comm_rank(comm, rank, ierr)
+
+! Read file with input parameters
+ if (rank == 0) then
+   open(50, FILE='BenchIO-Input.txt',FORM='FORMATTED',STATUS='old')
+   read(50,*)n1
+   read(50,*)n2
+   read(50,*)n3
+ !  read(50,*)numrep
+ !  read(50,*)filedir
+   close(50)
+ endif
+ call MPI_Bcast(n1,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(n2,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(n3,1,MPI_INTEGER,0,comm,ierr)
+ !call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
+ !call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
+ write(*,*) 'Here we are: ', maxlen,rank,filedir,numrep
+
+   allocate(iodata(0:n1+1, 0:n2+1, 0:n3+1))
 
   dims(:) = 0
 
@@ -228,6 +251,9 @@ program benchio
      write(*,*) '--------'
      write(*,*)
   end if
+
+! Clean up allocated storage
+  deallocate(iodata)
 
   call MPI_Finalize(ierr)
   
