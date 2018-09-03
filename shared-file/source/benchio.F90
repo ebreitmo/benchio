@@ -12,6 +12,8 @@ program benchio
   integer, parameter :: maxlen = 64
 !  integer, parameter :: numrep = 10
   integer :: numrep
+! To check preprocessor flag
+  integer :: withserial,withmpiio,withhdf5,withnetcdf
 
   character*(maxlen), dimension(numiolayer)  :: iostring, iolayername
 
@@ -74,6 +76,34 @@ program benchio
    read(50,*)n3
    read(50,*)numrep
    read(50,*)filedir
+   read(50,*)withserial
+   read(50,*)withmpiio
+   read(50,*)withhdf5
+   read(50,*)withnetcdf
+   if (withserial.eq.0.and.WITH_SERIAL.eq.1) then
+    write(*,*)'Warning: Default variable WITH_SERIAL set differently in Makefile and input file!'
+   endif
+   if (withserial.eq.1.and.WITH_SERIAL.eq.0) then
+    write(*,*)'Warning:	Default	variable WITH_SERIAL set differently in Makefile and input file!'
+   endif
+   if (withmpiio.eq.0.and.WITH_MPIIO.eq.1) then
+    write(*,*)'Warning: Default variable WITH_MPIIO set differently in Makefile and input file!'
+   endif
+   if (withmpiio.eq.1.and.WITH_MPIIO.eq.0) then
+    write(*,*)'Warning: Default variable WITH_MPIIO set differently in Makefile and input file!'
+   endif
+   if (withhdf5.eq.0.and.WITH_HDF5.eq.1) then
+    write(*,*)'Warning: Default variable WITH_HDF5 set differently in Makefile and input file!'
+   endif
+   if (withhdf5.eq.1.and.WITH_HDF5.eq.0) then
+    write(*,*)'Warning: Default variable WITH_HDF5 set differently in Makefile and input file!'
+   endif
+   if (withnetcdf.eq.0.and.WITH_NETCDF.eq.1) then
+    write(*,*)'Warning: Default variable WITH_NETCDF set differently in Makefile and input file!'
+   endif
+   if (withnetcdf.eq.1.and.WITH_NETCDF.eq.0) then
+    write(*,*)'Warning: Default variable WITH_NETCDF set differently in Makefile and input file!'
+   endif
    close(50)
  endif
  call MPI_Bcast(n1,1,MPI_INTEGER,0,comm,ierr)
@@ -82,6 +112,7 @@ program benchio
  call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
  write(*,*) 'Here we are: ', maxlen,rank,filedir,numrep
+ write(*,*) 'Preprocessor values: ', WITH_SERIAL, WITH_MPIIO,WITH_HDF5,WITH_NETCDF, WITH_DEFAULT
 
    allocate(iodata(0:n1+1, 0:n2+1, 0:n3+1))
 
