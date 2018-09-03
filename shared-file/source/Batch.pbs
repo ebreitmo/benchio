@@ -9,9 +9,8 @@
 export PBS_O_WORKDIR=$(readlink -f $PBS_O_WORKDIR)
 cd $PBS_O_WORKDIR
 
-mkdir -p benchio_files
-
-lfs setstripe -c -1 benchio_files
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs mkdir -p
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs lfs setstripe -c -1
 
 aprun -n 4 ./benchio.x 
 
