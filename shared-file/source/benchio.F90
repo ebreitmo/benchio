@@ -10,7 +10,8 @@ program benchio
 
   integer, parameter :: numiolayer = 4
   integer, parameter :: maxlen = 64
-  integer, parameter :: numrep = 10
+!  integer, parameter :: numrep = 10
+  integer :: numrep
 
   character*(maxlen), dimension(numiolayer)  :: iostring, iolayername
 
@@ -71,14 +72,14 @@ program benchio
    read(50,*)n1
    read(50,*)n2
    read(50,*)n3
- !  read(50,*)numrep
+   read(50,*)numrep
  !  read(50,*)filedir
    close(50)
  endif
  call MPI_Bcast(n1,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n2,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n3,1,MPI_INTEGER,0,comm,ierr)
- !call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
  !call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
  write(*,*) 'Here we are: ', maxlen,rank,filedir,numrep
 
