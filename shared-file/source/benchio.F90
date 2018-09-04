@@ -213,6 +213,12 @@ program benchio
        cycle
      endif
 #endif
+if (withserial.ne.1) then
+ if (iolayer == 1) then
+       cycle
+     endif
+endif
+
 #ifndef WITH_MPIIO
      if (iolayer == 2) then
        cycle
