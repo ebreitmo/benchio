@@ -17,4 +17,4 @@ The input is as follows:
 ````
 
 The setting of the preprocessor values will not override the settings in the ```Makefile``` for the compiler flags. 
-Only a warning will be issued that there is a discrepancy between what is set in the input file and the Makefile.
+A warning will be issued that there is a discrepancy between what is set in the input file and the Makefile.
