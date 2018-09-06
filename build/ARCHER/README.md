@@ -2,7 +2,7 @@
 
 Tested under all three programming environments on ARCHER: Cray, GNU, and Intel.
 
-For an ARCHER build:
+For an ARCHER build load the required modules:
 
 ```
 module load cray-netcdf-hdf5parallel/4.4.1.1
