@@ -35,7 +35,7 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 
 * [ARCHER (EPCC)](run/ARCHER/)
 * Athena (HPC Mid+) 
-* Cirrus (EPCC)
+* [Cirrus (EPCC)](run/Cirrus)
 * CSD3-Skylake (Cambridge)
 * Thomas (MMM Hub)
 
