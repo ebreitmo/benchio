@@ -134,8 +134,10 @@ program benchio
  call MPI_Bcast(n3,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(numrep,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(filedir,maxlen,MPI_CHARACTER,0,comm,ierr)
- write(*,*) 'Here we are: ', maxlen,rank,filedir,numrep
- write(*,*) 'Preprocessor values: ', WITH_SERIAL, WITH_MPIIO,WITH_HDF5,WITH_NETCDF, WITH_DEFAULT
+ call MPI_Bcast(withserial,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(withmpiio,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(withhdf5,1,MPI_INTEGER,0,comm,ierr)
+ call MPI_Bcast(withnetcdf,1,MPI_INTEGER,0,comm,ierr)
 
    allocate(iodata(0:n1+1, 0:n2+1, 0:n3+1))
 
@@ -208,32 +210,50 @@ program benchio
 
 !  Skip layer if support is not compiled in
 !  Expects iolayers in order: serial, MPI-IO, HDF5, NetCDF
-#ifndef WITH_SERIAL
-     if (iolayer == 1) then
-       cycle
-     endif
-#endif
-if (withserial.ne.1) then
- if (iolayer == 1) then
+!#ifndef WITH_SERIAL
+!     if (iolayer == 1) then
+!       cycle
+!     endif
+!#endif
+if (iolayer == 1) then
+ if (withserial.ne.1) then
        cycle
      endif
 endif
 
-#ifndef WITH_MPIIO
-     if (iolayer == 2) then
+!#ifndef WITH_MPIIO
+!     if (iolayer == 2) then
+!       write(*,*) 'DEFINE/In iolayer: ', iolayer, numiolayer
+!       cycle
+!     endif
+!#endif
+if (iolayer == 2) then
+ if (withmpiio.ne.1) then
        cycle
      endif
-#endif
-#ifndef WITH_HDF5
-     if (iolayer == 3) then
+endif
+
+!#ifndef WITH_HDF5
+!     if (iolayer == 3) then
+!       cycle
+!     endif
+!#endif
+if (iolayer == 3) then
+ if (withhdf5.ne.1) then
        cycle
      endif
-#endif
-#ifndef WITH_NETCDF
-     if (iolayer == 4) then
-       cycle
+endif
+
+!#ifndef WITH_NETCDF
+!     if (iolayer == 4) then
+!       cycle
+!     endif
+!#endif
+if (iolayer == 4) then
+ if (withnetcdf.ne.1) then
+        cycle
      endif
-#endif
+endif
 
      if (rank == 0) then
         write(*,*)
