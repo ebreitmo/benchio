@@ -7,7 +7,7 @@ returned. It is recommended that the maximum bandwidth be considered in most
 cases, due to variations in I/O performance from user contention.
 
 Data layout is 3D strided - intended to more closely resemble that of a real
-world application than 2D sequential. By default, array size is 256x256x256.
+world application than 2D sequential. By default, array size n1xn2xn3 is 256x256x256.
 
 Supports POSIX (serial), MPI-IO, HDF5 and NetCDF backends. A run will test all
 backends included at compile time.
@@ -22,7 +22,7 @@ support.
 ## Compilation details
 
 * [ARCHER (EPCC)](build/ARCHER/)
-* Athena (HPC Mid+) - No results yet
+* Athena (HPC Mid+) 
 * [Cirrus (EPCC)](build/Cirrus/)
 * [CSD3-Skylake (Cambridge)](build/CSD3Skylake/)
 * [Thomas (MMM Hub)](build/Thomas/)
@@ -34,7 +34,7 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 ## Job scripts
 
 * [ARCHER (EPCC)](run/ARCHER/)
-* Athena (HPC Mid+) - No results yet
+* Athena (HPC Mid+) 
 * Cirrus (EPCC)
 * CSD3-Skylake (Cambridge)
 * Thomas (MMM Hub)
