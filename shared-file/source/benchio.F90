@@ -72,6 +72,12 @@ program benchio
   double precision :: t0, t1, time, iorate, mibdata
   double precision :: mintime, maxiorate, avgtime, avgiorate
 
+! Set default to false
+  withserial = 0
+  withmpiio = 0
+  withhdf5 = 0
+  withnetcdf = 0
+
   iostring(1) = 'Serial'
   iostring(2) = 'MPI-IO'
   iostring(3) = ' HDF5 '
