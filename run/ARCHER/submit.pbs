@@ -1,0 +1,19 @@
+#!/bin/bash --login
+
+#PBS -N benchioARCHER
+##PBS -l select=1
+#PBS -l select=1
+#PBS -l walltime=00:05:00
+#PBS -A z19-cse
+
+export PBS_O_WORKDIR=$(readlink -f $PBS_O_WORKDIR)
+cd $PBS_O_WORKDIR
+
+# Create a directory with the name from the input file
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs mkdir -p
+# Set striping for this directory
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs lfs setstripe -c -1
+
+# Run on 4 processors on ARCHER
+aprun -n 4 ./benchio.x 
+
