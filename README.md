@@ -37,7 +37,7 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 * Athena (HPC Mid+) - No results yet
 * Cirrus (EPCC)
 * CSD3-Skylake (Cambridge)
-* Thomas (MMM Hub
+* Thomas (MMM Hub)
 
 
 
