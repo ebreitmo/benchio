@@ -34,22 +34,23 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 ## Job scripts
 
 * [ARCHER (EPCC)](run/ARCHER/)
-* [Cirrus (EPCC)](run/Cirrus/)
+* Cirrus (EPCC)
 * Athena (HPC Mid+) - No results yet
-* [CSD3-Skylake (Cambridge)](run/CSD3Skylake/)
-* [Thomas (MMM Hub)](run/Thomas/)
+* CSD3-Skylake (Cambridge)
+* Thomas (MMM Hub
 
 
 
 
 ## Adjusting volume of data
 
-The array size (per MPI rank) is controlled through the following constants in
+The array size (per MPI rank) is controlled through the following parameters in
 `benchio.F90`:
 
-`integer, parameter :: n1 = 256`
+`integer :: n1 `
 
-`integer, parameter :: n2 = 256`
+`integer :: n2 `
 
-`integer, parameter :: n3 = 256`
+`integer :: n3 `
 
+and are set in `BenchIO-Input.txt`.
