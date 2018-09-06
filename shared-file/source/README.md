@@ -16,5 +16,5 @@ The input is as follows:
                                  WITHNETCDF
 ````
 
-The setting of the preprocessor values in the ```Makefile``` for the compiler flags will be overwriteen by the entries in the input file. 
+The setting of the preprocessor values in the ```Makefile``` for the compiler flags will be overwritten by the entries in the input file. 
 A warning will be issued that there is a discrepancy between what is set in the input file and the Makefile.
