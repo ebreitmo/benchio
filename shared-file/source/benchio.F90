@@ -103,6 +103,23 @@ program benchio
    read(50,*)withmpiio
    read(50,*)withhdf5
    read(50,*)withnetcdf
+
+#ifndef WITH_SERIAL
+#define WITH_SERIAL 0
+#endif
+
+#ifndef WITH_MPIIO
+#define WITH_MPIIO 0
+#endif
+
+#ifndef WITH_HDf5
+#define WITH_HDF5 0
+#endif
+
+#ifndef WITH_NETCDF
+#define WITH_NETCDF 0
+#endif
+
    if (withserial.eq.0.and.WITH_SERIAL.eq.1) then
     write(*,*)'Warning: Default variable WITH_SERIAL set differently in Makefile and input file!'
    endif
