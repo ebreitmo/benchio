@@ -39,6 +39,23 @@ out the relevant `FFLAGS` lines in the `Makefile`. e.g. Commenting out:
 `FFLAGS+= -DWITH_NETCDF` will build the application with only MPI-IO and HDF5
 support.
 
+## Compilation details
+
+* [ARCHER (EPCC)](build/ARCHER/)
+* [Cirrus (EPCC)](build/Cirrus/)
+* Athena (HPC Mid+) - No results yet
+* [CSD3-Skylake (Cambridge)](build/CSD3Skylake/)
+* [Thomas (MMM Hub)](build/Thomas/)
+
+## Job scripts
+
+* [ARCHER (EPCC)](run/ARCHER/)
+* [Cirrus (EPCC)](run/Cirrus/)
+* Athena (HPC Mid+) - No results yet
+* [CSD3-Skylake (Cambridge)](run/CSD3Skylake/)
+* [Thomas (MMM Hub)](run/Thomas/)
+
+
 # Running
 
 For example, to test performance with maximum striping on Lustre:

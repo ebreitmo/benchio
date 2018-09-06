@@ -9,12 +9,12 @@ The input is as follows:
    # Problem size: dim3:         n3
    # Number of iterations:       numrep
    # Name of output directory:   filedir
-   # Preprocessor values (0 or 1)
-                                 WITH_SERIAL                 
-                                 WITH_MPIIO
-                                 WITH_HDF5
-                                 WITH_NETCDF
+   # Overwrite preprocessor values (0 or 1)
+                                 WITHSERIAL                 
+                                 WITHMPIIO
+                                 WITHHDF5
+                                 WITHNETCDF
 ````
 
-The setting of the preprocessor values will not override the settings in the ```Makefile``` for the compiler flags. 
-A warning will be issued that there is a discrepancy between what is set in the input file and the Makefile.
+The setting of the preprocessor values in the ```Makefile``` for the compiler flags will be overwritten by the entries in the input file. 
+A warning will be issued if there is a discrepancy between what is set in the input file and the Makefile.
