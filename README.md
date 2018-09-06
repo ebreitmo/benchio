@@ -22,8 +22,8 @@ support.
 ## Compilation details
 
 * [ARCHER (EPCC)](build/ARCHER/)
-* [Cirrus (EPCC)](build/Cirrus/)
 * Athena (HPC Mid+) - No results yet
+* [Cirrus (EPCC)](build/Cirrus/)
 * [CSD3-Skylake (Cambridge)](build/CSD3Skylake/)
 * [Thomas (MMM Hub)](build/Thomas/)
 
@@ -34,8 +34,8 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 ## Job scripts
 
 * [ARCHER (EPCC)](run/ARCHER/)
-* Cirrus (EPCC)
 * Athena (HPC Mid+) - No results yet
+* Cirrus (EPCC)
 * CSD3-Skylake (Cambridge)
 * Thomas (MMM Hub
 
