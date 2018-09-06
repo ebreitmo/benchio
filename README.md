@@ -12,26 +12,6 @@ world application than 2D sequential. By default, array size is 256x256x256.
 Supports POSIX (serial), MPI-IO, HDF5 and NetCDF backends. A run will test all
 backends included at compile time.
 
-# Compilation
-
-Tested under all three programming environments on ARCHER: Cray, GNU, and Intel.
-
-For an ARCHER build:
-
-`module load cray-netcdf-hdf5parallel/4.4.0`
-
-(outdated, and ``` cray-netcdf-hdf5parallel/4.4.1.1``` requires ```hdf5_hl_parallel >= 1.10.0```)
-
-`module load cray-hdf5-parallel/1.8.16`  
-
-`make clean`
-
-`make`
-
-For other platforms, edit the `Makefile` to point variables `FC` and `CC` to
-MPI compilers (e.g. `mpif90` and `mpicc`), and edit `LFLAGS` to the location of
-HDF5 and NetCDF libraries. Then `make clean && make`.
-
 ## Building with selected backends
 
 POSIX (serial), MPI-IO, HDF5 and NetCDF backends can be disabled by commenting
@@ -46,6 +26,10 @@ support.
 * Athena (HPC Mid+) - No results yet
 * [CSD3-Skylake (Cambridge)](build/CSD3Skylake/)
 * [Thomas (MMM Hub)](build/Thomas/)
+
+For other platforms, edit the `Makefile` to point variables `FC` and `CC` to
+MPI compilers (e.g. `mpif90` and `mpicc`), and edit `LFLAGS` to the location of
+HDF5 and NetCDF libraries. Then `make clean && make`.
 
 ## Job scripts
 
