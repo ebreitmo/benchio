@@ -1,0 +1,19 @@
+#!/bin/bash --login
+#
+#PBS -N benchio
+#PBS -l select=1:ncpus=36
+#PBS -l walltime=0:10:0
+#PBS -A z04
+
+module load mpt
+module load intel-compilers-17
+
+cd $PBS_O_WORKDIR
+
+# Create a directory with the name from the input file
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs mkdir -p
+# Set striping for this directory
+awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs lfs setstripe -c -1
+
+
+   mpiexec_mpt -n 4 ./benchio.x
