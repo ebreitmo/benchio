@@ -15,5 +15,6 @@ awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs mkdir -p
 # Set striping for this directory
 awk 'FNR == 5 {print}' BenchIO-Input.txt| xargs lfs setstripe -c -1
 
+BENCHIO=/lustre/home/z04/ebreitmo/eb-benchio/shared-file/source/benchio.x
 
-   mpiexec_mpt -n 4 ./benchio.x
+mpiexec_mpt -n 4 -ppn 4 $BENCHIO
