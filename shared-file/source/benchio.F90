@@ -33,7 +33,6 @@ program benchio
 
   integer, parameter :: numiolayer = 4
   integer, parameter :: maxlen = 64
-!  integer, parameter :: numrep = 10
   integer :: numrep
 ! To check preprocessor flag
   integer :: withserial,withmpiio,withhdf5,withnetcdf
@@ -47,18 +46,14 @@ program benchio
 ! Set local array size - global sizes l1, l2 and l3 are scaled
 ! by number of processes in each dimension
 
-!  integer, parameter :: n1 = 256
-   integer :: n1
-!  integer, parameter :: n2 = 256
-   integer :: n2
-!  integer, parameter :: n3 = 256
+  integer :: n1
+  integer :: n2
+  integer :: n3
   integer, parameter :: ndim = 3
-   integer :: n3
 
   integer :: i1, i2, i3, j1, j2, j3, l1, l2, l3, p1, p2, p3
 
-!  double precision :: iodata(0:n1+1, 0:n2+1, 0:n3+1)
-   double precision, allocatable :: iodata(:,:,:)
+  double precision, allocatable :: iodata(:,:,:)
 
   integer :: rank, size, ierr, comm, cartcomm, dblesize
   integer, dimension(ndim) :: dims, coords
@@ -88,8 +83,6 @@ program benchio
   iolayername(3) = 'hdf5.dat'
   iolayername(4) = 'netcdf.dat'
 
-!  filedir = 'benchio_files'
-
   call MPI_Init(ierr)
 
   comm = MPI_COMM_WORLD
@@ -97,20 +90,20 @@ program benchio
   call MPI_Comm_size(comm, size, ierr)
   call MPI_Comm_rank(comm, rank, ierr)
 
-! Read file with input parameters
+! Read file 'BenchIO-Input.txt' which contains all input parameters
  if (rank == 0) then
    open(50, FILE='BenchIO-Input.txt',FORM='FORMATTED',STATUS='old')
-   read(50,*)n1
+   read(50,*)n1          ! 3D grid
    read(50,*)n2
    read(50,*)n3
-   read(50,*)numrep
-   read(50,*)filedir
-   read(50,*)withserial
-   read(50,*)withmpiio
-   read(50,*)withhdf5
-   read(50,*)withnetcdf
+   read(50,*)numrep      ! Number of iterations
+   read(50,*)filedir     ! Where to put all the files to be created
+   read(50,*)withserial  ! Is serial benchmark to be executed: 0=no, 1=yes 
+   read(50,*)withmpiio   ! Is mpiio benchmark to be executed
+   read(50,*)withhdf5    ! IS hdf5 benchmark to be executed
+   read(50,*)withnetcdf  ! IS netcdf benchmark to be executed
 
-#ifndef WITH_SERIAL
+#ifndef WITH_SERIAL      ! In case the flag has not been set in the Makefile
 #define WITH_SERIAL 0
 #endif
 
@@ -126,6 +119,10 @@ program benchio
 #define WITH_NETCDF 0
 #endif
 
+! Check if choice for executing the serial/mpiio/hdf5/netcdf benchmarks agrees in the Makefile (with compiler flags)
+! and the input file 'BenchIO-Input.txt'
+! Prints a warning if they don't agree
+! The setting int he input file 'BenchIO-Input.txt' overwrites the setting from the Makefile
    if (withserial.eq.0.and.WITH_SERIAL.eq.1) then
     write(*,*)'Warning: Default variable WITH_SERIAL set differently in Makefile and input file!'
    endif
@@ -152,6 +149,8 @@ program benchio
    endif
    close(50)
  endif
+ 
+ !Broadcast the variables read in from 'BenchIO-Input.txt' to all processors
  call MPI_Bcast(n1,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n2,1,MPI_INTEGER,0,comm,ierr)
  call MPI_Bcast(n3,1,MPI_INTEGER,0,comm,ierr)
@@ -233,45 +232,24 @@ program benchio
 
 !  Skip layer if support is not compiled in
 !  Expects iolayers in order: serial, MPI-IO, HDF5, NetCDF
-!#ifndef WITH_SERIAL
-!     if (iolayer == 1) then
-!       cycle
-!     endif
-!#endif
 if (iolayer == 1) then
  if (withserial.ne.1) then
        cycle
      endif
 endif
 
-!#ifndef WITH_MPIIO
-!     if (iolayer == 2) then
-!       write(*,*) 'DEFINE/In iolayer: ', iolayer, numiolayer
-!       cycle
-!     endif
-!#endif
 if (iolayer == 2) then
  if (withmpiio.ne.1) then
        cycle
      endif
 endif
 
-!#ifndef WITH_HDF5
-!     if (iolayer == 3) then
-!       cycle
-!     endif
-!#endif
 if (iolayer == 3) then
  if (withhdf5.ne.1) then
        cycle
      endif
 endif
 
-!#ifndef WITH_NETCDF
-!     if (iolayer == 4) then
-!       cycle
-!     endif
-!#endif
 if (iolayer == 4) then
  if (withnetcdf.ne.1) then
         cycle
