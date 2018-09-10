@@ -67,12 +67,18 @@ program benchio
   double precision :: t0, t1, time, iorate, mibdata
   double precision :: mintime, maxiorate, avgtime, avgiorate
 
-! Set default to false
+! Default values, can be overwritten later by input file 'BenchIO-Input.txt'
+ n1 = 256
+ n2 = 256
+ n3 = 256
+ numrep=10
+ filedir = 'benchio_files'
+ ! Set default to false
   withserial = 0
   withmpiio = 0
   withhdf5 = 0
   withnetcdf = 0
-
+ 
   iostring(1) = 'Serial'
   iostring(2) = 'MPI-IO'
   iostring(3) = ' HDF5 '
@@ -90,7 +96,7 @@ program benchio
   call MPI_Comm_size(comm, size, ierr)
   call MPI_Comm_rank(comm, rank, ierr)
 
-! Read file 'BenchIO-Input.txt' which contains all input parameters
+! Read inpit file 'BenchIO-Input.txt' which contains all input parameters
  if (rank == 0) then
    open(50, FILE='BenchIO-Input.txt',FORM='FORMATTED',STATUS='old')
    read(50,*)n1          ! 3D grid
