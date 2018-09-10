@@ -2,12 +2,12 @@
 EPCC I/O benchmarking application. Tests write bandwidth to a single shared
 file for a given problem size per processor (weak scaling).
 
-Each test is performed 10 times (the number of iterations ```numrep``` can be changed in the input file) and the minimum, maximum and average bandwidth
+Each test is performed 10 times as a default (the number of iterations ```numrep``` can be changed in the input file) and the minimum, maximum and average bandwidth
 returned. It is recommended that the maximum bandwidth be considered in most
 cases, due to variations in I/O performance from user contention.
 
 Data layout is 3D strided - intended to more closely resemble that of a real
-world application than 2D sequential. By default, array size n1xn2xn3 is 256x256x256.
+world application than 2D sequential. By default, array size n1xn2xn3 is 256x256x256 (the grid size can be changed in the input file).
 
 Supports POSIX (serial), MPI-IO, HDF5 and NetCDF backends. A run will test all
 backends included at compile time.
