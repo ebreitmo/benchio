@@ -7,7 +7,15 @@ returned. It is recommended that the maximum bandwidth be considered in most
 cases, due to variations in I/O performance from user contention.
 
 Data layout is 3D strided - intended to more closely resemble that of a real
-world application than 2D sequential. By default, array size n1xn2xn3 is 256x256x256 (the grid size can be changed in the input file).
+world application than 2D sequential. The array size (per MPI rank) is controlled through the following parameters in
+`benchio.F90`:
+
+`integer :: n1 `
+
+`integer :: n2 `
+
+`integer :: n3 `
+By default, the array size n1xn2xn3 is 256x256x256 (the grid size can be changed in the input file).
 
 Supports POSIX (serial), MPI-IO, HDF5 and NetCDF backends. A run will test all
 backends included at compile time.
@@ -42,15 +50,3 @@ HDF5 and NetCDF libraries. Then `make clean && make`.
 
 
 
-## Adjusting volume of data
-
-The array size (per MPI rank) is controlled through the following parameters in
-`benchio.F90`:
-
-`integer :: n1 `
-
-`integer :: n2 `
-
-`integer :: n3 `
-
-and are set in `BenchIO-Input.txt`.
