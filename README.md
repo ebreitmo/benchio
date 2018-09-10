@@ -2,7 +2,7 @@
 EPCC I/O benchmarking application. Tests write bandwidth to a single shared
 file for a given problem size per processor (weak scaling).
 
-Each test is performed 10 times and the minimum, maximum and average bandwidth
+Each test is performed 10 times (the number of iterations ```numrep``` can be changed in the input file) and the minimum, maximum and average bandwidth
 returned. It is recommended that the maximum bandwidth be considered in most
 cases, due to variations in I/O performance from user contention.
 
